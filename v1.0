@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bonus Tracker 2025</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+  <title>TinQwise Bonus Tracker 2025</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
-      color: #333;
+      font-family: Rethink Sans, sans-serif;
+      background: #8B0000;
+      color: #000000;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -21,14 +20,14 @@
       width: 80%;
       max-width: 1000px;
       background: white;
-      border: 2px solid #f06200;
+      border: 2px solid #000000;
       border-radius: 8px;
       padding: 20px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
     h1 {
       text-align: center;
-      color: #f06200;
+      color: #8B0000;
     }
     .progress-bar-container {
       margin: 20px 0;
@@ -61,15 +60,35 @@
     .milestone span {
       font-size: 14px;
     }
-    #fileInput {
-      margin: 20px;
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:active {
+      transform: scale(0.98);
+    }
+    #increase {
+      background: #4CAF50;
+      color: white;
+    }
+    #decrease {
+      background: #f44336;
+      color: white;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Bonus Tracker 2025</h1>
-    <input type="file" id="fileInput" />
+    <h1>TinQwise Bonus Tracker '25</h1>
     <div class="progress-bar-container">
       <div class="progress-bar" id="progress-bar"></div>
     </div>
@@ -95,6 +114,10 @@
         <span>Corfu</span>
       </div>
     </div>
+    <div class="controls">
+      <button id="decrease">-</button>
+      <button id="increase">+</button>
+    </div>
   </div>
 
   <script>
@@ -107,41 +130,38 @@
       { id: 'milestone5', percentage: 100 }
     ];
 
-    const fileInput = document.getElementById('fileInput');
     const progressBar = document.getElementById('progress-bar');
+    const increaseButton = document.getElementById('increase');
+    const decreaseButton = document.getElementById('decrease');
 
-    fileInput.addEventListener('change', (event) => {
-      const file = event.target.files[0];
-      if (!file) return;
+    let progressPercentage = 0;
 
-      const reader = new FileReader();
+    // Update progress bar and milestones
+    function updateProgress() {
+      // Beperk de waarde tussen 0 en 100
+      progressPercentage = Math.max(0, Math.min(100, progressPercentage));
+      progressBar.style.width = `${progressPercentage}%`;
 
-      reader.onload = (e) => {
-        const data = new Uint8Array(e.target.result);
-        const workbook = XLSX.read(data, { type: 'array' });
-        const sheetName = workbook.SheetNames[0]; // Neem het eerste werkblad
-        const sheet = workbook.Sheets[sheetName];
+      milestones.forEach((milestone) => {
+        const milestoneElement = document.getElementById(milestone.id);
+        milestoneElement.style.opacity =
+          progressPercentage >= milestone.percentage ? '1' : '0.3';
+      });
+    }
 
-        // Lees het percentage uit cel B2
-        const cell = sheet['B2'];
-        const progressPercentage = cell ? parseFloat(cell.v) : 0;
-
-        // Update progress bar
-        progressBar.style.width = `${progressPercentage}%`;
-
-        // Highlight milestones
-        milestones.forEach((milestone) => {
-          const milestoneElement = document.getElementById(milestone.id);
-          if (progressPercentage >= milestone.percentage) {
-            milestoneElement.style.opacity = '1';
-          } else {
-            milestoneElement.style.opacity = '0.3';
-          }
-        });
-      };
-
-      reader.readAsArrayBuffer(file);
+    // Event Listeners voor knoppen
+    increaseButton.addEventListener('click', () => {
+      progressPercentage += 10;
+      updateProgress();
     });
+
+    decreaseButton.addEventListener('click', () => {
+      progressPercentage -= 10;
+      updateProgress();
+    });
+
+    // Initialize progress
+    updateProgress();
   </script>
 </body>
 </html>
