@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bonus Tracker 2025</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      width: 80%;
+      max-width: 1000px;
+      background: white;
+      border: 2px solid #f06200;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #f06200;
+    }
+    .progress-bar-container {
+      margin: 20px 0;
+      background: #e0e0e0;
+      border-radius: 20px;
+      overflow: hidden;
+      height: 30px;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #f06200, #fc9c1a);
+      transition: width 0.5s;
+    }
+    .milestones {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+    .milestone {
+      text-align: center;
+      width: 18%;
+    }
+    .milestone img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-bottom: 5px;
+    }
+    .milestone span {
+      font-size: 14px;
+    }
+    #fileInput {
+      margin: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Bonus Tracker 2025</h1>
+    <input type="file" id="fileInput" />
+    <div class="progress-bar-container">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+    <div class="milestones">
+      <div class="milestone" id="milestone1">
+        <img src="https://via.placeholder.com/50" alt="Milestone">
+        <span>Luxe Kerstfeest</span>
+      </div>
+      <div class="milestone" id="milestone2">
+        <img src="https://via.placeholder.com/50" alt="Milestone">
+        <span>België</span>
+      </div>
+      <div class="milestone" id="milestone3">
+        <img src="https://via.placeholder.com/50" alt="Milestone">
+        <span>Portugal</span>
+      </div>
+      <div class="milestone" id="milestone4">
+        <img src="https://via.placeholder.com/50" alt="Milestone">
+        <span>Wintersport</span>
+      </div>
+      <div class="milestone" id="milestone5">
+        <img src="https://via.placeholder.com/50" alt="Milestone">
+        <span>Corfu</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Milestone percentages
+    const milestones = [
+      { id: 'milestone1', percentage: 20 },
+      { id: 'milestone2', percentage: 40 },
+      { id: 'milestone3', percentage: 60 },
+      { id: 'milestone4', percentage: 80 },
+      { id: 'milestone5', percentage: 100 }
+    ];
+
+    const fileInput = document.getElementById('fileInput');
+    const progressBar = document.getElementById('progress-bar');
+
+    fileInput.addEventListener('change', (event) => {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        const data = new Uint8Array(e.target.result);
+        const workbook = XLSX.read(data, { type: 'array' });
+        const sheetName = workbook.SheetNames[0]; // Neem het eerste werkblad
+        const sheet = workbook.Sheets[sheetName];
+
+        // Lees het percentage uit cel B2
+        const cell = sheet['B2'];
+        const progressPercentage = cell ? parseFloat(cell.v) : 0;
+
+        // Update progress bar
+        progressBar.style.width = `${progressPercentage}%`;
+
+        // Highlight milestones
+        milestones.forEach((milestone) => {
+          const milestoneElement = document.getElementById(milestone.id);
+          if (progressPercentage >= milestone.percentage) {
+            milestoneElement.style.opacity = '1';
+          } else {
+            milestoneElement.style.opacity = '0.3';
+          }
+        });
+      };
+
+      reader.readAsArrayBuffer(file);
+    });
+  </script>
+</body>
+</html>
