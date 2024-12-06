@@ -5,84 +5,94 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TinQwise Bonus Tracker 2025</title>
   <style>
+    /* Algemene stijl gebaseerd op TinQwise */
     body {
-      font-family: Rethink Sans, sans-serif;
-      background: #8B0000;
-      color: #000000;
+      font-family: 'Rethink Sans', Arial, sans-serif;
+      background: url('https://via.placeholder.com/1920x1080') no-repeat center center fixed;
+      background-size: cover;
+      color: #333333;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
       margin: 0;
+      transition: background 0.5s ease-in-out;
     }
+
     .container {
-      width: 80%;
+      width: 90%;
       max-width: 1000px;
       background: white;
-      border: 2px solid #000000;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     }
+
     h1 {
       text-align: center;
-      color: #8B0000;
+      color: #000000;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
     }
+
     .progress-bar-container {
-      margin: 20px 0;
-      background: #e0e0e0;
-      border-radius: 20px;
+      margin: 30px 0;
+      background: #f5f5f5;
+      border-radius: 30px;
       overflow: hidden;
-      height: 30px;
+      height: 40px;
     }
+
     .progress-bar {
       height: 100%;
       width: 0%;
-      background: linear-gradient(90deg, #f06200, #fc9c1a);
+      background: linear-gradient(90deg, #FFE5DF, #E3350F);
       transition: width 0.5s;
     }
+
     .milestones {
       display: flex;
       justify-content: space-between;
-      margin-top: 10px;
-    }
-    .milestone {
-      text-align: center;
-      width: 18%;
-    }
-    .milestone img {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      margin-bottom: 5px;
-    }
-    .milestone span {
-      font-size: 14px;
-    }
-    .controls {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
       margin-top: 20px;
     }
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+
+    .milestone {
+      text-align: center;
+      flex: 1;
     }
-    button:active {
-      transform: scale(0.98);
+
+    .milestone img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+      border: 3px solid #E3350F;
+      transition: transform 0.3s ease;
     }
-    #increase {
-      background: #4CAF50;
-      color: white;
+
+    .milestone img:hover {
+      transform: scale(1.1);
     }
-    #decrease {
-      background: #f44336;
-      color: white;
+
+    .milestone span {
+      display: block;
+      font-size: 1rem;
+      margin-top: 5px;
+      color: #000000;
+    }
+
+    .milestone .percentage {
+      font-size: 0.9rem;
+      color: #E3350F;
+      margin-top: 5px;
+    }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: #000000;
     }
   </style>
 </head>
@@ -94,71 +104,71 @@
     </div>
     <div class="milestones">
       <div class="milestone" id="milestone1">
-        <img src="https://via.placeholder.com/50" alt="Milestone">
-        <span>Luxe Kerstfeest</span>
+        <img src="https://cdn3.acsi.eu/6/7/4/c/674c72b7a2230.jpg" alt="Almere">
+        <span>Kamperen in Almere</span>
+        <span class="percentage">20%</span>
       </div>
       <div class="milestone" id="milestone2">
-        <img src="https://via.placeholder.com/50" alt="Milestone">
-        <span>België</span>
+        <img src="https://images.corendonresources.com/L1E9468A1W300H200.jpg?v=221007145943" alt="Tenerife">
+        <span>All-inclusief Tenerife</span>
+        <span class="percentage">40%</span>
       </div>
       <div class="milestone" id="milestone3">
-        <img src="https://via.placeholder.com/50" alt="Milestone">
+        <img src="https://media.istockphoto.com/id/1483204178/nl/foto/yellow-typical-tram-in-lisbon-portugal.jpg?s=612x612&w=0&k=20&c=EDXy3h2S5YOuaa_4deaQ8oR6BWLr490ecI48hd5_5BA=" alt="Portugal">
         <span>Portugal</span>
+        <span class="percentage">60%</span>
       </div>
       <div class="milestone" id="milestone4">
-        <img src="https://via.placeholder.com/50" alt="Milestone">
+        <img src="https://cdn.indebergen.nl/media/jtbjbpmj/52774848641_117c41eb92_o.jpg" alt="Wintersport">
         <span>Wintersport</span>
+        <span class="percentage">80%</span>
       </div>
       <div class="milestone" id="milestone5">
-        <img src="https://via.placeholder.com/50" alt="Milestone">
+        <img src="https://waarovernachtenin.nl/wp-content/uploads/2022/05/Leukste-hotel-Corfu-1240x610.jpg" alt="Corfu">
         <span>Corfu</span>
+        <span class="percentage">100%</span>
       </div>
     </div>
-    <div class="controls">
-      <button id="decrease">-</button>
-      <button id="increase">+</button>
+    <div class="footer-note">
+      <p>Bereik de doelen en ontrendel de beloningen voor 2025! 🚀</p>
     </div>
   </div>
 
   <script>
-    // Milestone percentages
+    // Milestone percentages en achtergrondafbeeldingen
     const milestones = [
-      { id: 'milestone1', percentage: 20 },
-      { id: 'milestone2', percentage: 40 },
-      { id: 'milestone3', percentage: 60 },
-      { id: 'milestone4', percentage: 80 },
-      { id: 'milestone5', percentage: 100 }
+      { id: 'milestone1', percentage: 20, image: 'https://cdn3.acsi.eu/6/7/4/c/674c72b7a2230.jpg' },
+      { id: 'milestone2', percentage: 40, image: 'https://images.corendonresources.com/L1E9468A1W300H200.jpg?v=221007145943' },
+      { id: 'milestone3', percentage: 60, image: 'https://media.istockphoto.com/id/1483204178/nl/foto/yellow-typical-tram-in-lisbon-portugal.jpg?s=612x612&w=0&k=20&c=EDXy3h2S5YOuaa_4deaQ8oR6BWLr490ecI48hd5_5BA=' },
+      { id: 'milestone4', percentage: 80, image: 'https://cdn.indebergen.nl/media/jtbjbpmj/52774848641_117c41eb92_o.jpg' },
+      { id: 'milestone5', percentage: 100, image: 'https://waarovernachtenin.nl/wp-content/uploads/2022/05/Leukste-hotel-Corfu-1240x610.jpg' }
     ];
 
     const progressBar = document.getElementById('progress-bar');
-    const increaseButton = document.getElementById('increase');
-    const decreaseButton = document.getElementById('decrease');
+    let progressPercentage = 80; // Pas dit percentage aan
 
-    let progressPercentage = 0;
-
-    // Update progress bar and milestones
+    // Update progress bar, milestones en achtergrond
     function updateProgress() {
-      // Beperk de waarde tussen 0 en 100
       progressPercentage = Math.max(0, Math.min(100, progressPercentage));
       progressBar.style.width = `${progressPercentage}%`;
+
+      let achievedMilestone = null;
 
       milestones.forEach((milestone) => {
         const milestoneElement = document.getElementById(milestone.id);
         milestoneElement.style.opacity =
           progressPercentage >= milestone.percentage ? '1' : '0.3';
+
+        if (progressPercentage >= milestone.percentage) {
+          achievedMilestone = milestone;
+        }
       });
+
+      // Update achtergrond als er een milestone is behaald
+      if (achievedMilestone) {
+        document.body.style.backgroundImage = `url('${achievedMilestone.image}')`;
+      }
     }
-
-    // Event Listeners voor knoppen
-    increaseButton.addEventListener('click', () => {
-      progressPercentage += 10;
-      updateProgress();
-    });
-
-    decreaseButton.addEventListener('click', () => {
-      progressPercentage -= 10;
-      updateProgress();
-    });
 
     // Initialize progress
     updateProgress();
